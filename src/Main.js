@@ -1,6 +1,8 @@
 import React from 'react'
 import FullScreenMain from './FullScreenMain'
 import './Main.css'
+import uuid from 'react-uuid';
+
 const Main = () => {
   const cardArr = [
     {title:"Greek ",
@@ -61,7 +63,7 @@ const Main = () => {
     <div className='card-group'>
     {cardArr.map(card => {
       return (
-        <div className='card'>
+        <div className='card' key={uuid()}>
       <img className='main-img' src={`/icons_assets/${card.imgUrl}`}/>
       <h2 className='sub-title'>{card.title}</h2>
       <h3 className='sub-title'>${card.price}</h3>
@@ -76,7 +78,7 @@ const Main = () => {
           <div className='main2Cards card-group'>
               {cards2.map(card => {
                 return (
-                  <div className='card'>
+                  <div className='card' key={uuid()}>
                 <img className='card2img' src={`/icons_assets/download.png`}/>
                 <h2 className='sub-title'>{card.userName}</h2>
                 <p className='plain-text'>{card.description}</p>

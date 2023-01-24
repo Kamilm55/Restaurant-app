@@ -36,5 +36,12 @@ hr{
 }
 
 .link{
-  all: unset;
+  all: unset !important;
+}
+.link:hover{
+  cursor: pointer !important;
+}
+
+a{
+  all: unset !important;
 }
