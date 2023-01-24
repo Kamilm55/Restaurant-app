@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './Footer.css'
 
 const Footer = () => {
@@ -9,12 +10,12 @@ const Footer = () => {
       <div><img src='/icons_assets/LOGO.png'  className='f-img'/></div>
       <div >
           <h2 className='title  headerText'>Navigation</h2>
-          <a className='f-link'>Home</a>
-          <a className='f-link'>About</a>
-          <a className='f-link'>Menu</a>
-          <a className='f-link'>Reservations</a>
-          <a className='f-link'>Order</a>
-          <a className='f-link'>Login</a>
+          <Link to='/'><a className='f-link'>Home</a></Link>
+          <Link to='/about'><a className='f-link'>About</a></Link>
+          <a href='/icons_assets/menu.webp' className='f-link' target="_blank">Menu</a>
+          <Link to='/booking'><a className='f-link'>Reservations</a></Link>
+          <Link to='/order'><a className='f-link'>Order</a></Link>
+          <Link to='/login'><a className='f-link'>Login</a></Link>
       </div>
       <div>
       <h2 className='title headerText'>Contact</h2>

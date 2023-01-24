@@ -43,5 +43,12 @@ hr{
 }
 
 a{
-  all: unset !important;
+  all: unset ;
+}
+
+.navbar{
+  position: sticky !important;
+}
+.MuiFormHelperText-root {
+  color: red !important;
 }

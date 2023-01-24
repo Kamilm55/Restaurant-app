@@ -10,14 +10,14 @@ const HomePage = () => {
     <>
      <nav><Nav/></nav>
 
-<header><Header/></header>
+    <header><Header/></header>
 
-<main>
-  <Main/>
-  <FullScreenMain/>
-</main>
+      <main>
+        <Main/>
+        <FullScreenMain/>
+      </main>
 
-  <footer><Footer/></footer>
+    <footer><Footer/></footer>
     </>
   )
 }

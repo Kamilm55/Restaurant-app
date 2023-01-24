@@ -1,7 +1,10 @@
 import React from 'react'
 import "./Header.css"
+import { useNavigate } from 'react-router-dom'
 
 const Header = () => {
+  const navigate = useNavigate();
+
   return (
     <div className='header'>
      
@@ -13,7 +16,7 @@ const Header = () => {
       <div className='sub-content'>
     <p className='headerText plain-text'> We are a family owned
      Mediterranean restaurant, focused on traditional recipes served with a modern twist.</p>
-    <button className='primaryButton'  style={{backgroundColor:"#F4CE14"}}><h3>Reserve a table</h3></button>
+    <button onClick={() => navigate("/booking")} className='primaryButton'  style={{backgroundColor:"#F4CE14"}}><h3>Reserve a table</h3></button>
       </div>
     </div>
     <img className='main-img' src='/icons_assets/Mario and Adrian A.jpg'/>
