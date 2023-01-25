@@ -5,8 +5,7 @@ import * as Yup from 'yup';
 import { useEffect } from 'react';
 
 
-const BookingForm = ({times,occasions ,dispatch , setValues,formikValues}) => {
-  const vaxt = [1 , 2 ,3 ,4,5];
+const BookingForm = ({times,occasions ,fetchAPI ,dispatch , setValues,formikValues}) => {
 
     const formik = useFormik({
         initialValues:{
@@ -16,11 +15,10 @@ const BookingForm = ({times,occasions ,dispatch , setValues,formikValues}) => {
             occasion:"",
         },
         onSubmit:values =>{
-            // alert(JSON.stringify(values));
-            // dispatch({type:Math.ceil(Math.random() * vaxt.length)});
             setValues([...formikValues , formik.values]);
+            dispatch({type:"submitted",values:values});
             formik.resetForm();
-            dispatch({type:5}); //For resetting value to return an initialState
+            // dispatch({type:"non-selected"}); //For resetting value to return an initialState
         },
         validationSchema:  Yup.object().shape({
             date:Yup.string().required("Required"),
@@ -32,13 +30,13 @@ const BookingForm = ({times,occasions ,dispatch , setValues,formikValues}) => {
 
     useEffect(() =>{
       if(formik.values.date !== "")
-      dispatch({type:Math.ceil(Math.random() * (vaxt.length - 1))});
+        dispatch({type:"selected" , formikDate:formik.values.date});
     } , [formik.values.date])
 
   return (
     <>
     <form onSubmit={formik.handleSubmit}  style={{margin:"10px auto",display: 'grid', maxWidth: '200px', gap: "20px"}}>
-    <label htmlFor="res-date">Choose date</label>
+    <label htmlFor="res-date" >Choose date</label>
    <TextField value={formik.values.date} {...formik.getFieldProps("date")}  id="res-date" type="date"  variant="filled" 
     helperText={formik.errors && formik.touched.date ? formik.errors.date  : null}
    />

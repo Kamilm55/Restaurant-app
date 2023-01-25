@@ -6,7 +6,7 @@ import MainBooking from './MainBooking'
 const BookingPage = () => {
   return (
     <>
-   <nav><Nav/></nav>
+    <nav><Nav/></nav>
     <header><h1>BookingPage</h1></header>
     <main><MainBooking /></main>
     <footer><Footer/></footer>

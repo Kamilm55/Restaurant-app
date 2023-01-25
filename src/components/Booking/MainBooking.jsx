@@ -1,29 +1,45 @@
 import React from 'react'
 import BookingForm from './BookingForm'
 import BookingSlots from './BookingSlots';
+import {fetchAPI} from '../../API'
+import { Button } from '@mui/material';
+import { useNavigate } from 'react-router';
+import { useEffect } from 'react';
 
 const MainBooking = () => {
     const availableOccasions  =  ["Birthday" , "Anniversary" , "Other"];
-    const [formikValues , setValues] = React.useState([]);
-    const initialState = ['17:00','18:00','19:00','20:00','21:00','22:00'];
-    function updateTimes  (state , action) {
-        if(action.type === 3)
-        return ['17:00','19:00','20:00',];
-        else if(action.type === 2)
-        return ['17:00','20:00',];
-        else if(action.type === 1)
-        return ['22:00',];
-        else if(action.type === 4)
-        return ['17:00','19:00','20:00','21:00'];
-        else return ['17:00','18:00','19:00','20:00','21:00','22:00'];
-    }
+    const [formikValues , setValues] = React.useState(JSON.parse(localStorage.getItem('reservations')) ?  [...JSON.parse(localStorage.getItem('reservations'))] : []) ;
+    const initialState = fetchAPI(new Date())
+  const navigate = useNavigate();
 
+  function updateTimes  (state , action) {
+      if(action.type === 'selected')
+        return fetchAPI(action.formikDate);
+      else if(action.type === 'submitted')
+        return fetchAPI(action.values);
+    }
     const [availableTimes , dispatch] = React.useReducer(updateTimes,initialState );
 
-  return (
+  console.log(formikValues);
+
+    function deleteFunc(){
+      localStorage.clear();
+      window.location.reload();
+    }
+
+      useEffect(()=>{
+        localStorage.setItem('reservations' , JSON.stringify(formikValues));
+      },[formikValues])
+
+    return (
     <>
-      <BookingForm times={availableTimes} dispatch={dispatch} formikValues={formikValues} setValues={setValues} occasions={availableOccasions}/>
+      <BookingForm fetchAPI={fetchAPI} times={availableTimes} dispatch={dispatch} formikValues={formikValues} setValues={setValues} occasions={availableOccasions}/>
         {formikValues ?  <BookingSlots formikValues={formikValues} /> : null}
+        {formikValues.length > 0 ? <div> <Button variant='contained' size='large'  style={{margin:"10px auto"}} 
+        onClick={()=> navigate('/confirming')}>Confirm Bookings</Button>
+          <Button variant='contained' color='error' size='large' onClick={()=>deleteFunc()}>Clear all</Button>
+        </div> : null}
+
     </>
   )
 }

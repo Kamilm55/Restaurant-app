@@ -10,12 +10,12 @@ const Footer = () => {
       <div><img src='/icons_assets/LOGO.png'  className='f-img'/></div>
       <div >
           <h2 className='title  headerText'>Navigation</h2>
-          <Link to='/'><a className='f-link'>Home</a></Link>
-          <Link to='/about'><a className='f-link'>About</a></Link>
+          <Link to='/'><p className='f-link'>Home</p></Link>
+          <Link to='/about'><p className='f-link'>About</p></Link>
           <a href='/icons_assets/menu.webp' className='f-link' target="_blank">Menu</a>
-          <Link to='/booking'><a className='f-link'>Reservations</a></Link>
-          <Link to='/order'><a className='f-link'>Order</a></Link>
-          <Link to='/login'><a className='f-link'>Login</a></Link>
+          <Link to='/booking'><p className='f-link'>Reservations</p></Link>
+          <Link to='/order'><p className='f-link'>Order</p></Link>
+          <Link to='/login'><p className='f-link'>Login</p></Link>
       </div>
       <div>
       <h2 className='title headerText'>Contact</h2>

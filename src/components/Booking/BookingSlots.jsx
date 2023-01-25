@@ -2,7 +2,6 @@ import React from 'react'
 import uuid from "react-uuid";
 
 const BookingSlots = ({formikValues}) => {
-    console.log(formikValues);
   return (
     <>
             <h2>Your reservations</h2>
