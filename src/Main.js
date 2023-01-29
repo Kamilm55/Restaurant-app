@@ -2,6 +2,7 @@ import React from 'react'
 import FullScreenMain from './FullScreenMain'
 import './Main.css'
 import uuid from 'react-uuid';
+import { Link } from 'react-router-dom';
 
 const Main = () => {
   const cardArr = [
@@ -59,16 +60,22 @@ const Main = () => {
   return (
     <div className='main '>
       <h1 className='title'>This weeks specials</h1>
-      <button  className='primaryButton' style={{border:"0px",borderRadius:"8px"}}><h2><a href='/icons_assets/menu.webp' className='link' target="_blank">Online Menu</a></h2></button>
+      <button  className='primaryButton menuBtn' >
+      <a href='/icons_assets/menu.webp' className='link link-center' target="_blank">
+         <h2>
+          Online Menu
+        </h2></a></button>
     <div className='card-group'>
     {cardArr.map(card => {
       return (
         <div className='card' key={uuid()}>
-      <img className='main-img' src={`/icons_assets/${card.imgUrl}`}/>
+      <img className='main-img' loading='lazy' src={`/icons_assets/${card.imgUrl}`}/>
       <h2 className='sub-title'>{card.title}</h2>
       <h3 className='sub-title'>${card.price}</h3>
       <p className='plain-text'>{card.description}</p>
-      <button className='primaryButton' style={{border:"0px",borderRadius:"8px"}}>Order for Delivery</button>
+      <button className='primaryButton menuBtn'>
+       <Link  to="/order" className='link-center'>Order for Delivery</Link>
+        </button>
       </div>)
     })}
     </div>
@@ -79,7 +86,7 @@ const Main = () => {
               {cards2.map(card => {
                 return (
                   <div className='card' key={uuid()}>
-                <img className='card2img' src={`/icons_assets/download.png`}/>
+                <img className='card2img' loading='lazy' src={`/icons_assets/download.png`}/>
                 <h2 className='sub-title'>{card.userName}</h2>
                 <p className='plain-text'>{card.description}</p>
                   </div>

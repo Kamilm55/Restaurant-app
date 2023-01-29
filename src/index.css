@@ -44,6 +44,14 @@ hr{
 
 a{
   all: unset ;
+} 
+
+.link-center{
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
 
 .navbar{
@@ -51,4 +59,13 @@ a{
 }
 .MuiFormHelperText-root {
   color: red !important;
+}
+
+.loginPage{
+  width:75%;
+  margin: auto auto;
+}
+
+.content100vh{
+  min-height:100vh ;
 }

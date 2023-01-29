@@ -63,3 +63,12 @@
     object-fit: cover;
     height: 300px;
 }
+
+.menuBtn{
+    border:0px;
+    border-radius:8px;
+}
+
+.black{
+    color: black !important;
+}

@@ -57,3 +57,11 @@
     transition: .25s;
     cursor: pointer;
 }
+
+.yellow-text{
+    color:#F4CE14;
+}
+
+.yellow-bg{
+    background-color: #F4CE14;
+}

@@ -7,7 +7,7 @@ const Footer = () => {
 
   return (
     <div className='footer'>
-      <div><img src='/icons_assets/LOGO.png'  className='f-img'/></div>
+      <div><img src='/icons_assets/LOGO.png' loading='lazy'  className='f-img'/></div>
       <div >
           <h2 className='title  headerText'>Navigation</h2>
           <Link to='/'><p className='f-link'>Home</p></Link>
@@ -26,9 +26,9 @@ Chicago Illinois</p>
       </div>
       <div>
       <h2 className='title headerText'>Connect</h2>
-          <a className='f-link'>Facebook</a>
-          <a className='f-link'>Instagram</a>
-          <a className='f-link'>Join us!</a>
+          <a className='f-link' target='_blank' href='https://www.facebook.com/'>Facebook</a>
+          <a className='f-link' target='_blank' href='https://www.instagram.com/'>Instagram</a>
+          <a className='f-link' href='#'>Join us!</a>
       </div>
     </div>
   )

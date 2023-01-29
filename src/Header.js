@@ -2,6 +2,7 @@ import React from 'react'
 import "./Header.css"
 import { useNavigate } from 'react-router-dom'
 
+
 const Header = () => {
   const navigate = useNavigate();
 
@@ -10,16 +11,23 @@ const Header = () => {
      
     <div className='content'>
       <div className='title-content'>
-    <h1 className='title' style={{color:"#F4CE14"}}>Little Lemon</h1>
+    <h1 className='title yellow-text'>Little Lemon</h1>
     <h2  className='headerText sub-title'>Chicago</h2>
       </div>
       <div className='sub-content'>
     <p className='headerText plain-text'> We are a family owned
      Mediterranean restaurant, focused on traditional recipes served with a modern twist.</p>
-    <button onClick={() => navigate("/booking")} className='primaryButton'  style={{backgroundColor:"#F4CE14"}}><h3>Reserve a table</h3></button>
+    <button aria-label='On Click' onClick={() => navigate("/booking")} className='primaryButton yellow-bg'><h3>Reserve a table</h3></button>
       </div>
     </div>
-    <img className='main-img' src='/icons_assets/Mario and Adrian A.jpg'/>
+    {/* <LazyLoadImage
+    src='/icons_assets/Mario and Adrian A.jpg'
+    loading='lazy'
+    className='main-img'
+    effect='blur'
+    placeholderSrc='/icons_assets/Mario and Adrian A.jpg'
+    /> */}
+    <img className='main-img' loading='lazy' src='/icons_assets/Mario and Adrian A.jpg'/>
 
     </div>
   )

@@ -46,6 +46,7 @@ const BookingForm = ({times,occasions ,fetchAPI ,dispatch , setValues,formikValu
    {...formik.getFieldProps("time")}
    helperText={formik.errors && formik.touched.time ? formik.errors.time  : null}
           id="res-time"
+          className="res-time"
           select
           label="Time"
           defaultValue="EUR"
@@ -80,7 +81,7 @@ const BookingForm = ({times,occasions ,fetchAPI ,dispatch , setValues,formikValu
             </MenuItem>
           ))}
         </TextField>
-    <Button  type='submit' variant='contained' size="medium">Make Your reservation</Button>
+    <Button aria-label='On Submit'  type='submit' variant='contained' size="medium">Make Your reservation</Button>
     </form>
     </>
   )

@@ -23,7 +23,7 @@ const MainBooking = () => {
   console.log(formikValues);
 
     function deleteFunc(){
-      localStorage.clear();
+      localStorage.removeItem('reservations');
       window.location.reload();
     }
 
