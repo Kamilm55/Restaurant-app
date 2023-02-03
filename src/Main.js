@@ -1,10 +1,16 @@
-import React from 'react'
-import FullScreenMain from './FullScreenMain'
+import React, { useEffect, useState } from 'react'
 import './Main.css'
 import uuid from 'react-uuid';
-import { Link } from 'react-router-dom';
+import { UseMuiContext } from './Context/MuiContextProvider';
+import MuiCarousel from './components/MUIcomp/MuiCarousel';
+import { CircularProgress } from '@mui/material';
+import { useNavigate } from 'react-router';
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Main = () => {
+  const {loading , setLoading,handleClick ,order , setOrder} = UseMuiContext();
+  const navigate = useNavigate();
   const cardArr = [
     {title:"Greek ",
     description:"The famous greek salad of crispy lettuce, peppers, olives and our Chicago style feta cheese, garnished with crunchy garlic and rosemary croutons. ",
@@ -57,42 +63,71 @@ const Main = () => {
     description:"I've had some great Mediterranean food before, but none of them beats Little Lemon in flavor and texture.",
   },
   ]
+
+  function handleClickAndTiming(item){
+    handleClick(item);
+
+    setTimeout(()=>{
+        setLoading({});
+        navigate('/order');
+    },1000)
+ }
+
+  useEffect(()=>{
+    localStorage.setItem("order",JSON.stringify(order));
+  },[order]);
+
+  useEffect(() => {
+    AOS.init();
+    AOS.refresh();
+  }, []);
+  
   return (
     <div className='main '>
       <h1 className='title'>This weeks specials</h1>
       <button  className='primaryButton menuBtn' >
-      <a href='/icons_assets/menu.webp' className='link link-center' target="_blank">
+      <a href='/icons_assets/menu.webp' className='link ' target="_blank">
          <h2>
           Online Menu
         </h2></a></button>
-    <div className='card-group'>
-    {cardArr.map(card => {
+    <div className='card-group  '>
+    <div className="smallCards CarouselCards">
+      <MuiCarousel itemArr={cardArr} />
+      </div>
+      <div className='bigCards card-group'>
+    {cardArr.map((card , index) => {
       return (
-        <div className='card' key={uuid()}>
-      <img className='main-img' loading='lazy' src={`/icons_assets/${card.imgUrl}`}/>
-      <h2 className='sub-title'>{card.title}</h2>
-      <h3 className='sub-title'>${card.price}</h3>
-      <p className='plain-text'>{card.description}</p>
-      <button className='primaryButton menuBtn'>
-       <Link  to="/order" className='link-center'>Order for Delivery</Link>
+        <div className='card'  key={uuid()}>
+        <img alt='img' className='main-img' loading='lazy' src={`/icons_assets/${card.imgUrl}`}/>
+        <h2 className='sub-title'>{card.title}</h2>
+        <h3 className='sub-title'>${card.price}</h3>
+        <p className='plain-text'>{card.description}</p>
+        <button onClick={() => handleClickAndTiming(card)} className='primaryButton menuBtn'>
+        {loading.description === card.description ? <CircularProgress   size={30}/>  : <p>Order for Delivery</p>}
         </button>
-      </div>)
-    })}
+        </div>)
+      })}
+      </div>
     </div>
 
       <div className='main2'>
         <h1 className='title'>Testimonials</h1>
-          <div className='main2Cards card-group'>
-              {cards2.map(card => {
+          <div className=' card-group'>
+          <div className="smallCards CarouselCards">
+            <MuiCarousel itemArr={cards2} />
+            </div>
+            <div className='bigCards main2Cards  '>
+              {cards2.map((card,index) => {
                 return (
-                  <div className='card' key={uuid()}>
-                <img className='card2img' loading='lazy' src={`/icons_assets/download.png`}/>
+                  <div className='card' data-aos='fade-up-right' data-aos-duration={500 + (index * 200)} key={uuid()}>
+                <img alt='img' className='card2img' loading='lazy' src={`/icons_assets/download.png`}/>
                 <h2 className='sub-title'>{card.userName}</h2>
                 <p className='plain-text'>{card.description}</p>
                   </div>
                 )
               })}
           </div>
+      </div>
       </div>
 
       </div>

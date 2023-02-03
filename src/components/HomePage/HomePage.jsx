@@ -1,11 +1,21 @@
-import React from 'react'
-import Footer from '../../Footer';
-import FullScreenMain from '../../FullScreenMain';
+import React,{useEffect} from 'react'
+import { useLocation } from 'react-router';
+import Nav from '../../Nav';
 import Header from '../../Header';
 import Main from '../../Main';
-import Nav from '../../Nav';
+import FullScreenMain from '../../FullScreenMain';
+import Footer from '../../Footer';
+
+// const Footer = React.lazy(() => import('../../Footer'));
+// const OrderPage = React.lazy(() => import('./components/Order/OrderPage'));
 
 const HomePage = () => {
+  const {pathname} = useLocation();
+
+  useEffect(()=>{
+    window.scrollTo(0, 0);
+  },[pathname])
+
   return (
     <>
      <nav><Nav/></nav>

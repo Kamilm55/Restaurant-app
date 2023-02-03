@@ -12,7 +12,8 @@ const OrderPage = () => {
     return (
       <>
       <nav><Nav/></nav>
-      <header><h1>OrderPage</h1></header>
+      <header><h1 className='abouth1 title'>Your Order</h1></header>
+            <img alt='img' className='about-img' src='/icons_assets/on.jpeg' loading='lazy'></img>
       <main className='content100vh'>
         {hasUser ? <MainOrder/> : <MUIdialog hasUser={hasUser}/>}
         </main>

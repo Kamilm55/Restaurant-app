@@ -1,8 +1,13 @@
 import React from 'react';
 import './Nav.css';
 import { Link} from 'react-router-dom';
+import {List} from 'react-bootstrap-icons'
+import { UseMuiContext } from './Context/MuiContextProvider';
+import FullScDialog from './components/MUIcomp/FullScDialog';
 
 const Nav = () => {
+  const {openModal ,setOpen} = UseMuiContext();
+
   return (
     <>
   <ul className='navbar'>
@@ -13,8 +18,9 @@ const Nav = () => {
         <li><Link to='/booking' className='link-center'><h1>Reservations</h1></Link></li>
         <li><Link to='/order' className='link-center'><h1>Order</h1></Link></li>
         <li><Link to='/login' className='link-center'><h1>Login</h1></Link></li>
-        {/* <li><a><img src='/icons_assets/Basket.svg'/></a></li> */}
-      </ul>
+        <li><List size={40} onClick={()=>setOpen(!openModal)}/></li>
+    </ul>
+    {openModal ? <FullScDialog/> : null}
     </>
   )
 }

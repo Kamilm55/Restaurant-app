@@ -35,7 +35,7 @@ const BookingForm = ({times,occasions ,fetchAPI ,dispatch , setValues,formikValu
 
   return (
     <>
-    <form onSubmit={formik.handleSubmit}  style={{margin:"10px auto",display: 'grid', maxWidth: '200px', gap: "20px"}}>
+    <form onSubmit={formik.handleSubmit}  style={{margin:"10px auto",display: 'grid', maxWidth: '300px', gap: "20px"}}>
     <label htmlFor="res-date" >Choose date</label>
    <TextField value={formik.values.date} {...formik.getFieldProps("date")}  id="res-date" type="date"  variant="filled" 
     helperText={formik.errors && formik.touched.date ? formik.errors.date  : null}
@@ -81,7 +81,7 @@ const BookingForm = ({times,occasions ,fetchAPI ,dispatch , setValues,formikValu
             </MenuItem>
           ))}
         </TextField>
-    <Button aria-label='On Submit'  type='submit' variant='contained' size="medium">Make Your reservation</Button>
+    <Button aria-label='On Submit'  type='submit' variant='contained' size="large" style={{padding:"18px 0"}}>Make Your reservation</Button>
     </form>
     </>
   )

@@ -1,14 +1,18 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React , {useEffect} from 'react'
+import { Link  ,useLocation} from 'react-router-dom'
 import './Footer.css'
 
 const Footer = () => {
- 
+  const {pathname} = useLocation();
+
+  useEffect(()=>{
+    window.scrollTo(0, 0);
+  },[pathname])
 
   return (
     <div className='footer'>
-      <div><img src='/icons_assets/LOGO.png' loading='lazy'  className='f-img'/></div>
-      <div >
+      <div className='resImg'><img alt='img' src='/icons_assets/LOGO.png' loading='lazy'  className='f-img'/></div>
+      <div className='resImg' >
           <h2 className='title  headerText'>Navigation</h2>
           <Link to='/'><p className='f-link'>Home</p></Link>
           <Link to='/about'><p className='f-link'>About</p></Link>
@@ -17,17 +21,17 @@ const Footer = () => {
           <Link to='/order'><p className='f-link'>Order</p></Link>
           <Link to='/login'><p className='f-link'>Login</p></Link>
       </div>
-      <div>
+      <div >
       <h2 className='title headerText'>Contact</h2>
           <p className='plain-text headerText'>2395 Maldove Way,
 Chicago Illinois</p>
           <p className='plain-text headerText'>(629)-243-6827</p>
-          <a className='f-link'>info@littlelemon.com</a>
+          <a className='f-link' href='#'>info@littlelemon.com</a>
       </div>
       <div>
       <h2 className='title headerText'>Connect</h2>
-          <a className='f-link' target='_blank' href='https://www.facebook.com/'>Facebook</a>
-          <a className='f-link' target='_blank' href='https://www.instagram.com/'>Instagram</a>
+          <a className='f-link' target='_blank' rel='noreferrer' href='https://www.facebook.com/'>Facebook</a>
+          <a className='f-link' target='_blank' rel='noreferrer' href='https://www.instagram.com/'>Instagram</a>
           <a className='f-link' href='#'>Join us!</a>
       </div>
     </div>

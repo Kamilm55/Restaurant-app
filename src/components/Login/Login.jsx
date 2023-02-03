@@ -10,18 +10,23 @@ const Login = () => {
 
     useEffect(()=>{
       localStorage.setItem('currentUser' , JSON.stringify(user));
+      localStorage.removeItem('reservations');
+      localStorage.removeItem('order');
     },[user])
+
 
   return (
     <>
        <nav><Nav/></nav>
     <div className='loginPage content100vh'>
-    <header><h1>LOGIN</h1></header>
+    <br></br><br></br>
+    <header><h1 className='title'>LOGIN</h1></header>
 
     <main>
+      <img className='resImg loginImg' loading='lazy' alt='img' src='https://img.freepik.com/free-photo/restaurant-interior_1127-3394.jpg'/>
         <ConditionalForm isRegister={isRegister}  formikValues={user} setValues={setUser}/>
-        <p>If you don't have account</p>
-        <Link to='/register' className='link' >Sign up</Link>
+        <p className='medium'>If you don't have account</p>
+        <Link to='/register' className='link ' ><p className='medium' style={{color:"blue",textDecoration:"underline"}}>Sign up</p></Link>
     </main>
 
     </div>

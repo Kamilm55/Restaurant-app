@@ -27,7 +27,7 @@ const Header = () => {
     effect='blur'
     placeholderSrc='/icons_assets/Mario and Adrian A.jpg'
     /> */}
-    <img className='main-img' loading='lazy' src='/icons_assets/Mario and Adrian A.jpg'/>
+    <img alt='img' className='main-img resImg' loading='lazy' src='/icons_assets/Mario and Adrian A.jpg'/>
 
     </div>
   )

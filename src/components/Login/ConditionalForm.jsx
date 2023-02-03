@@ -2,9 +2,14 @@ import React from 'react';
 import { TextField , MenuItem  , Button} from '@mui/material'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import MuiAlert from '../MUIcomp/MuiAlert';
+import { useState } from 'react';
 
 const ConditionalForm = ({isRegister,formikValues , setValues}) => {
-        //It is login page ' s form 
+    const [isOpen , setOpen] = useState(false);
+    const [alertMsg , setMsg] = useState('');
+    const [isSuccess , setSuccess] = useState(false);
+    //It is login page ' s form 
         //If isRegister is false but if it is true it'll be registerForm
     const formik = useFormik({
         initialValues:{
@@ -19,14 +24,18 @@ const ConditionalForm = ({isRegister,formikValues , setValues}) => {
                 let count = 0
                     formikValues.map(registeredArr => {
                         if(registeredArr.email === values.email){
-                            alert("You have account with this email");
+                            setSuccess(false);
+                            setMsg("You have account with this email");
                             count++;
                         }
                     })
                     if(count === 0 ){
                         setValues([...formikValues,values]);
+                        setSuccess(true);
+                        setMsg('You succesfully signed up')
                         formik.resetForm();
                     }
+                    setOpen(true);
             }
             else{//This is for Login
                 let count = 0;
@@ -38,11 +47,16 @@ const ConditionalForm = ({isRegister,formikValues , setValues}) => {
                         count++;
                     }
                 })
-                if(count === 0)
-                alert("You don't have account with this email and password . Please try again ")
+                if(count === 0){
+                    setSuccess(false)
+                    setMsg("You don't have account with this email and password . Please try again ");
+                }
                 else{
+                    setSuccess(true);
+                    setMsg('You succesfully signed in')
                     formik.resetForm();
                 }
+                setOpen(true);
             }
             // formik.resetForm();
         },
@@ -64,8 +78,8 @@ const ConditionalForm = ({isRegister,formikValues , setValues}) => {
 
     return (
     <>
-    <form onSubmit={formik.handleSubmit}>
-       
+    <form  className='inputParent' onSubmit={formik.handleSubmit}>
+       <MuiAlert open={isOpen} setOpen={setOpen} alertMsg={alertMsg} isSuccess={isSuccess}/>
         {isRegister ? (
              <div style={{display:'flex',gap:'25px',margin:'15px 0'}}>
              <TextField 
@@ -73,6 +87,7 @@ const ConditionalForm = ({isRegister,formikValues , setValues}) => {
             value={formik.values.firstName} id="FirstName" label="First name" variant="outlined"
             helperText={formik.errors && formik.touched.firstName ? formik.errors.firstName : null }
             />
+            
              <TextField 
             {...formik.getFieldProps("lastName")}
             value={formik.values.lastName} id="LastName" label="Last name" variant="outlined" 
@@ -80,7 +95,7 @@ const ConditionalForm = ({isRegister,formikValues , setValues}) => {
             />
                  </div>
         ) : null}
-     <div style={{display:'flex',gap:'25px',margin:'15px 0'}}>
+     <div  style={{display:'flex',gap:'25px',margin:'15px 0'}}>
             <TextField 
            {...formik.getFieldProps("email")} type="email"
            value={formik.values.email} id="Email" label="Email" variant="outlined"
