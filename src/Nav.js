@@ -10,7 +10,7 @@ const Nav = () => {
 
   return (
     <>
-  <ul className='navbar'>
+  <ul onScroll={()=>document.querySelector('nav').style.transform = 'translate3d(0px,0px,0px)'} className='navbar'>
         <li><Link to="/" ><img src='/icons_assets/Logo.svg' className='link link-center' alt='img'/></Link></li>
         <li><Link to="/"  className='link-center'><h1>Home</h1></Link></li>
         <li><Link to='/about' className='link-center'><h1>About</h1></Link></li>
