@@ -1,37 +1,36 @@
 import React from 'react';
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import MobileStepper from "@mui/material/MobileStepper";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { CircularProgress } from '@mui/material';
-import SwipeableViews from "react-swipeable-views";
-import { autoPlay } from "react-swipeable-views-utils";
 import { UseMuiContext } from '../../Context/MuiContextProvider';
 import uuid from 'react-uuid';
 import { useNavigate } from 'react-router-dom';
 import {  CaretLeftFill, CaretRightFill } from 'react-bootstrap-icons';
+import Slider from "react-slick";
+// import "~slick-carousel/slick/slick.css"; 
+// import "~slick-carousel/slick/slick-theme.css";
 
 const MuiCarousel = (itemArr ) => {
-    const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
     const theme = useTheme();
     const [activeStep, setActiveStep] = React.useState(0);
     const {loading , setLoading ,handleClick} = UseMuiContext();
     const navigate = useNavigate();
     const images = itemArr;
-    const maxSteps = images.itemArr.length;
-
-    function handleNext() {
-        setActiveStep(activeStep + 1)
-    }
-    function handleBack() {
-        setActiveStep(activeStep - 1)
-    }
-    
-    function handleStepChange(step) {
-        setActiveStep(step)
-    }
+    const settings = {
+      dots: true,
+      lazyLoad: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      initialSlide: 0,
+      autoplay: true,
+      autoplaySpeed: 2000,
+      cssEase: "linear"
+    };
 
      function handleClickAndTiming(item){
         handleClick(item);
@@ -57,16 +56,12 @@ const MuiCarousel = (itemArr ) => {
           >
             <Typography>{images.itemArr[activeStep].title}</Typography>
           </Paper>
-          <AutoPlaySwipeableViews
-          className='bg-white'
-            axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-            index={activeStep}
-            onChangeIndex={handleStepChange}//This automatically send number me which max is equal to my array length
-            enableMouseEvents
-          >
-            {images.itemArr.map((step, index) => (
+          <Slider
+           {...settings}
+           className='bg-white'
+           >
+          {images.itemArr.map((step, index) => (
               <div key={uuid()}>
-                {Math.abs(activeStep - index) <= 2 ? (
                   <div>
                     {step.userName ? (
                         <>
@@ -100,42 +95,10 @@ const MuiCarousel = (itemArr ) => {
                  
                         </>
                     )}
-                   
-                
-                    </div> 
-                ) : null}
+                   </div> 
               </div>
             ))}
-          </AutoPlaySwipeableViews>
-          <MobileStepper
-            steps={maxSteps}
-            position="static"
-            activeStep={activeStep}
-            nextButton={
-              <Button
-                size="small"
-                onClick={handleNext}
-                disabled={activeStep === maxSteps - 1}
-              >
-                Next
-                {theme.direction === "rtl" ? (
-                  <CaretLeftFill />
-                ) : (
-                    <CaretRightFill />
-                )}
-              </Button>
-            }
-            backButton={
-              <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-                {theme.direction === "rtl" ? (
-                  <CaretRightFill />
-                ) : (
-                    <CaretLeftFill />
-                )}
-                Back
-              </Button>
-            }
-          />
+          </Slider>
         </Box>
       );
 }
